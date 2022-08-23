@@ -1,0 +1,13 @@
+[
+{
+    "model": "api.shipment",
+    "pk": 1,
+    "fields": {
+        "shipping_address": "asdasd",
+        "biling_address": "asdasd",
+        "product_price": "123.00",
+        "delivery_cost": "123.00",
+        "final_price": "123.00"
+    }
+}
+]
