@@ -15,8 +15,15 @@
           <b-form-input
             id="shipping-address-input"
             v-model="shipment.shipping_address"
+            :state="!errors.shipping_address"
+            aria-describedby="input-live-help input-live-feedback"
             required
           ></b-form-input>
+          <b-form-invalid-feedback id="shipping-address-input">
+            <span v-for="(error, index) in errors.shipping_address" :key="index">
+              {{error}}
+            </span>
+          </b-form-invalid-feedback>
         </b-form-group>
         <b-form-group
           label="biling_address"
@@ -25,8 +32,15 @@
           <b-form-input
             id="biling-address-input"
             v-model="shipment.biling_address"
+            :state="!errors.biling_address"
+            aria-describedby="input-live-help input-live-feedback"
             required
           ></b-form-input>
+          <b-form-invalid-feedback id="biling-address-input">
+            <span v-for="(error, index) in errors.biling_address" :key="index">
+              {{error}}
+            </span>
+          </b-form-invalid-feedback>
         </b-form-group>
         <b-form-group
           label="product_price"
@@ -36,8 +50,15 @@
             id="product-price-input"
             type="number"
             v-model="shipment.product_price"
+            :state="!errors.product_price"
+            aria-describedby="input-live-help input-live-feedback"
             required
           ></b-form-input>
+          <b-form-invalid-feedback id="product-price-input">
+            <span v-for="(error, index) in errors.product_price" :key="index">
+              {{error}}
+            </span>
+          </b-form-invalid-feedback>
         </b-form-group>
         <b-form-group
           label="delivery_cost"
@@ -47,8 +68,15 @@
             id="delivery-cost-input"
             type="number"
             v-model="shipment.delivery_cost"
+            :state="!errors.delivery_cost"
+            aria-describedby="input-live-help input-live-feedback"
             required
           ></b-form-input>
+          <b-form-invalid-feedback id="delivery-cost-input">
+            <span v-for="(error, index) in errors.delivery_cost" :key="index">
+              {{error}}
+            </span>
+          </b-form-invalid-feedback>
         </b-form-group>
          <b-form-group
           label="final_price"
@@ -58,8 +86,15 @@
             id="final-price-input"
             type="number"
             v-model="shipment.final_price"
+            :state="!errors.final_price"
+            aria-describedby="input-live-help input-live-feedback"
             required
           ></b-form-input>
+          <b-form-invalid-feedback id="final-price-input">
+            <span v-for="(error, index) in errors.final_price" :key="index">
+              {{error}}
+            </span>
+          </b-form-invalid-feedback>
         </b-form-group>
       </form>
     </b-modal>
@@ -88,7 +123,7 @@ export default {
     },
     data() {
       return {
-        name: '',
+        errors: {}
       }
     },
     computed: {
@@ -112,13 +147,18 @@ export default {
         this.handleSubmit()
       },
       handleSubmit() {
+        this.errors = {}
         const promise = this.isCreate
             ? this.axios.post('api/shipments/', this.shipment)
             : this.axios.put(`api/shipments/${this.shipment.id}/`, this.shipment)
 
-        promise.finally(() => {          
+
+        promise.then(() => {          
           this.$bvModal.hide(this.mode)
           this.$emit('submit')
+        })
+        promise.catch((error) => {
+          this.errors = error.response.data
         })
       }
     }

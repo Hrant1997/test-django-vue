@@ -2,6 +2,8 @@
   <div class="shipments">
     <b-button v-b-modal.create class="m-2">Create Shipment</b-button>
     <b-table
+      striped
+      hover
       :items="shipments"
       :fields="fields"
     >
@@ -21,6 +23,7 @@
 import CreateUpdateShipmentModal from "./CreateUpdateShipmentModal.vue";
 export default {
     name: "Shipments",
+    components: { CreateUpdateShipmentModal },
     data() {
         return {
             shipments: [],
@@ -58,7 +61,6 @@ export default {
             this.axios.delete(`api/shipments/${id}/`).finally(this.getShipments)
         }
     },
-    components: { CreateUpdateShipmentModal }
 }
 </script>
 <style scoped>

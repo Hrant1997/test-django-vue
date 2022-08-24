@@ -4,14 +4,16 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import { BootstrapVue, IconsPlugin, TableLitePlugin} from "bootstrap-vue";
+import Vuelidate from 'vuelidate'
+import { BootstrapVue, BootstrapVueIcons, TableLitePlugin} from "bootstrap-vue";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import 'bootstrap-vue/dist/bootstrap-vue-icons.min.css'
 
-
+Vue.use(Vuelidate)
 Vue.use(BootstrapVue);
-Vue.use(IconsPlugin);
+Vue.use(BootstrapVueIcons);
 Vue.use(TableLitePlugin)
 Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
