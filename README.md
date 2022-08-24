@@ -7,7 +7,7 @@ $ git clone https://github.com/Hrant1997/test-django-vue.git
 $ cd test-django-vue
 ```
 
-Back end instalation
+Back end installation
 
 ```sh
 $ cd back-end/test_app
@@ -16,7 +16,7 @@ $ python3 ./manage.py migrate
 $ python3 ./manage.py runserver
 ```
 
-Front end instalation
+Front end installation
 
 ```sh
 $ cd front-end
